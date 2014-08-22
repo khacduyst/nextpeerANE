@@ -17,7 +17,7 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
 			});
  --------------------------------------------------------------------------
 
-<b>Some importance functions and flows</b>
+<b>Some importance functions and order of call flows when working with nextpeer </b>
  
  - initNextPeer(gameid:String) or initNextPeerWithSetting(gameid:String,style:String,alignment:String,position:String)
  - showDashboard();
