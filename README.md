@@ -23,8 +23,8 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
  - registerDeviceToken
  
  Because Nextpeer return data on GameResult (gameend) diffrence on iOS and Android so please read receivedTournamentResultSignal document to make sure you get right data
- 
- <b>Some importance functions and flows</b>
+
+<b>Some importance functions and flows</b>
  
  - initNextPeer(gameid:String) or initNextPeerWithSetting(gameid:String,style:String,alignment:String,position:String)
  - showDashboard();
