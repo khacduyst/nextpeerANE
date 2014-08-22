@@ -1,10 +1,11 @@
+nextpeerANE
+===========
 Adobe native extension that wrap Nextpeer SDK API, run on both iOS and Android
 http://smappi.com
  
- 
 This game is using Signal (https://github.com/robertpenner/as3-signals) concept to fire events, some event return data object,please construct document api for more details 
  
- <b>Example</b> :
+ <b>Example on signal usage</b> :
  --------------------------------------------------------------------------
  			nextpeerExt.receivedCustomDataUnreliable.add(function(e:NPTournamentCustomMessage){
 				var bys:ByteArray = e.message;
@@ -44,18 +45,63 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
  			var keyid:String = "";
 			
 			if(getOS()=="IOS"){
-				//iOS
-				keyid = "d9834a0e00be6c963bfbef66c9513cf5";
-				trace("IOS");
+				keyid = "YOUR_NEXT_PEER_IOS_GAME_KEY";
 			}else{
-				//android
-				keyid = "314f9feceb5058b0239d0b4b950ac0b5";
-				trace("Android");
+				keyid = "YOUR_NEXT_PEER_ANDROID_GAME_KEY";
 			}
 			
 			nextpeerExt.initNextPeerWithSetting(keyid,NextpeerRankingDisplayStyle.SOLO,NextpeerRankingDisplayAlignment.VERTICAL,NextpeerRankingDisplayPosition.BOTTOM_RIGHT);
+			
+			//or just call nextpeerExt.initNextPeer(keyid);
 
- 			
+ 			nextpeerExt.gameStartedWithDetailsSignal.add(function(e:NextpeerTournamentContainer){
+				trace(e.tournamentUuid);
+				trace(e.tournamentRandomSeed);
+				trace(e.tournamentTimeSeconds);
+				
+				playscreen.visible = true;
+				homescreen.visible = false;
+			});
+			
+			nextpeerExt.receivedTournamentResultSignal.add(function(e:NPTournamentEndDataContainer):void{
+				trace("received result : "+e.playerRankInTournament);
+			});
+			
+			var byteArr:ByteArray = new ByteArray();
+			byteArr.writeBoolean(false);
+			byteArr.writeInt(15);
+			byteArr.writeDouble(16.5);
+			byteArr.writeUTF("this is a test message"); 
+			TestNextpeer.instance.nextpeerExt.sendCustomdata(byteArr);
+			TestNextpeer.instance.nextpeerExt.sendCustomdataUnreliable(byteArr);
+			
+			nextpeerExt.receivedCustomData.add(function(e:NPTournamentCustomMessage){
+				var bys:ByteArray = e.message;
+				trace("---- received ---------");
+				trace(bys.readBoolean());
+				trace(bys.readInt());
+				trace(bys.readDouble());
+				trace(bys.readUTF());
+				
+				trace("---- end received ---------"); 
+			});
+			
+			nextpeerExt.receivedCustomDataUnreliable.add(function(e:NPTournamentCustomMessage){
+				var bys:ByteArray = e.message;
+				trace("---- unreliable received ---------");
+				trace(bys.readBoolean());
+				trace(bys.readInt());
+				trace(bys.readDouble());
+				trace(bys.readUTF());
+				
+				trace("---- end unreliable received ---------"); 
+			});
+			
+			nextpeerExt.gameEndedSignal.add(function(){
+				playscreen.visible = false;
+				homescreen.visible = true;
+				trace("game ended");
+			});
  
  
  --------------------------------------------------------------------------
@@ -63,9 +109,7 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
 
 
 
-nextpeerANE
-===========
-Nextpeer SDK port to Adobe Air (iOS and Android supported)
+
 
 
 Events : We used Signal to dispatch events
