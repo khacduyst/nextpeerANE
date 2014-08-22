@@ -1,9 +1,8 @@
-
-A Adobe native extension that wrap Nextpeer SDK API, run on both iOS and Android
- http://smappi.com
+Adobe native extension that wrap Nextpeer SDK API, run on both iOS and Android
+http://smappi.com
  
  
- This game is using Signal (https://github.com/robertpenner/as3-signals) concept to fire events, some event return data object,please construct document api for more details 
+This game is using Signal (https://github.com/robertpenner/as3-signals) concept to fire events, some event return data object,please construct document api for more details 
  
  <b>Example</b> :
  --------------------------------------------------------------------------
