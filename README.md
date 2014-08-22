@@ -1,66 +1,65 @@
-**
-	 * A Adobe native extension that wrap Nextpeer SDK API, run on both iOS and Android
-	 * http://smappi.com
-	 * 
-	 * 
-	 * This game is using Signal (https://github.com/robertpenner/as3-signals) concept to fire events, some event return data object,please construct document api for more details 
-	 * 
-	 * <b>Example</b> :
-	 * --------------------------------------------------------------------------
-	 * 			nextpeerExt.receivedCustomDataUnreliable.add(function(e:NPTournamentCustomMessage){
-	 *				var bys:ByteArray = e.message;
-	 *				trace("---- unreliable received ---------");
-	 *	 			trace(bys.readBoolean());
-	 *				trace(bys.readInt());
-	 *				trace(bys.readDouble());
-	 *				trace(bys.readUTF());
-	 *				trace("---- end unreliable received ---------"); 
-	 *			});
-	 * --------------------------------------------------------------------------
-	 *  
-	 * <b>Only use these API on iOS:</b>
-	 * - sendNotification2Nextpeer
-	 * - registerDeviceToken
-	 * 
-	 * Because Nextpeer return data on GameResult (gameend) diffrence on iOS and Android so please read receivedTournamentResultSignal document to make sure you get right data
-	 * 
-	 * <b>Some importance functions and flows</b>
-	 * 
-	 * - initNextPeer(gameid:String) or initNextPeerWithSetting(gameid:String,style:String,alignment:String,position:String)
-	 * - showDashboard();
-	 * - gameStartedWithDetailsSignal
-	 * - receivedTournamentStatusSignal
-	 * - reportScore(score:Number)
-	 * - sendCustomdata(dataArr:ByteArray) or sendCustomdataUnreliable(dataArr:ByteArray)
-	 * - receivedCustomData and receivedCustomDataUnreliable
-	 * - endGame(score:Number)
-	 * - gameEndedSignal
-	 * - receivedTournamentResultSignal
-	 * 
-	 *
-	 * <b> simple how to use </b>
-	 * --------------------------------------------------------------------------
-	 * 			public var nextpeerExt:NextpeerExtension = new NextpeerExtension();
-	 * 
-	 * 			var keyid:String = "";
-	 *			
-	 *			if(getOS()=="IOS"){
-	 *				//iOS
-	 *				keyid = "d9834a0e00be6c963bfbef66c9513cf5";
-	 *				trace("IOS");
-	 *			}else{
-	 *				//android
-	 *				keyid = "314f9feceb5058b0239d0b4b950ac0b5";
-	 *				trace("Android");
-	 *			}
-	 *			
-	 *			nextpeerExt.initNextPeerWithSetting(keyid,NextpeerRankingDisplayStyle.SOLO,NextpeerRankingDisplayAlignment.VERTICAL,NextpeerRankingDisplayPosition.BOTTOM_RIGHT);
-	 *
-	 * 			
-	 * 
-	 * 
-	 * --------------------------------------------------------------------------
-	 */
+
+A Adobe native extension that wrap Nextpeer SDK API, run on both iOS and Android
+ http://smappi.com
+ 
+ 
+ This game is using Signal (https://github.com/robertpenner/as3-signals) concept to fire events, some event return data object,please construct document api for more details 
+ 
+ <b>Example</b> :
+ --------------------------------------------------------------------------
+ 			nextpeerExt.receivedCustomDataUnreliable.add(function(e:NPTournamentCustomMessage){
+				var bys:ByteArray = e.message;
+				trace("---- unreliable received ---------");
+	 			trace(bys.readBoolean());
+				trace(bys.readInt());
+				trace(bys.readDouble());
+				trace(bys.readUTF());
+				trace("---- end unreliable received ---------"); 
+			});
+ --------------------------------------------------------------------------
+  
+ <b>Only use these API on iOS:</b>
+ - sendNotification2Nextpeer
+ - registerDeviceToken
+ 
+ Because Nextpeer return data on GameResult (gameend) diffrence on iOS and Android so please read receivedTournamentResultSignal document to make sure you get right data
+ 
+ <b>Some importance functions and flows</b>
+ 
+ - initNextPeer(gameid:String) or initNextPeerWithSetting(gameid:String,style:String,alignment:String,position:String)
+ - showDashboard();
+ - gameStartedWithDetailsSignal
+ - receivedTournamentStatusSignal
+ - reportScore(score:Number)
+ - sendCustomdata(dataArr:ByteArray) or sendCustomdataUnreliable(dataArr:ByteArray)
+ - receivedCustomData and receivedCustomDataUnreliable
+ - endGame(score:Number)
+ - gameEndedSignal
+ - receivedTournamentResultSignal
+ 
+
+ <b> simple how to use </b>
+ --------------------------------------------------------------------------
+ 			public var nextpeerExt:NextpeerExtension = new NextpeerExtension();
+ 
+ 			var keyid:String = "";
+			
+			if(getOS()=="IOS"){
+				//iOS
+				keyid = "d9834a0e00be6c963bfbef66c9513cf5";
+				trace("IOS");
+			}else{
+				//android
+				keyid = "314f9feceb5058b0239d0b4b950ac0b5";
+				trace("Android");
+			}
+			
+			nextpeerExt.initNextPeerWithSetting(keyid,NextpeerRankingDisplayStyle.SOLO,NextpeerRankingDisplayAlignment.VERTICAL,NextpeerRankingDisplayPosition.BOTTOM_RIGHT);
+
+ 			
+ 
+ 
+ --------------------------------------------------------------------------
 
 
 
