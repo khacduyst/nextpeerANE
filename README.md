@@ -17,12 +17,6 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
 				trace("---- end unreliable received ---------"); 
 			});
  --------------------------------------------------------------------------
-  
- <b>Only use these API on iOS:</b>
- - sendNotification2Nextpeer
- - registerDeviceToken
- 
- Because Nextpeer return data on GameResult (gameend) diffrence on iOS and Android so please read receivedTournamentResultSignal document to make sure you get right data
 
 <b>Some importance functions and flows</b>
  
@@ -36,7 +30,8 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
  - endGame(score:Number)
  - gameEndedSignal
  - receivedTournamentResultSignal
- 
+
+Because Nextpeer return data on GameResult (gameend) diffrence on iOS and Android so please read receivedTournamentResultSignal document to make sure you get right data 
 
  <b> simple how to use </b>
  --------------------------------------------------------------------------
@@ -106,35 +101,47 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
  
  --------------------------------------------------------------------------
 
-Login Facebook
+Login Facebook (iOS setting)
 ===========
-
+To allow login from facebook, you shold put this to your xml Please ge facebook SSO on Nextpeer dashboard and replace string start with fb and your app id in the sample code below 
+--------------------------------------------------------------------------
         <key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb192019987525706combizzonappfdotscfec</string>
+				<string>fbxxxxxxxxxxxxxxxxxxxxxxxx</string>
 			</array>
 			<key>CFBundleURLName</key>
-			<string>com.bizzon.app.fdots</string>
+			<string>your.app.id</string>
 		</dict>
 	</array>
+--------------------------------------------------------------------------
 	
+Pushnotifications (iOS)
+===========
+Please use any push notification ane to allow your Adobe Air app using Push Notification, this one is good : https://github.com/freshplanet/ANE-Push-Notification
+
+After that, when you receive token and pushdata, please pass to Nextpeer throug 2 functions below:
+
+ - sendNotification2Nextpeer(str:String) : str is json string you get via push
+ - registerDeviceToken(token:String)
+
+Please make sure you have this in your app.xml to enable push working
+--------------------------------------------------------------------------
 	<Entitlements>
 		<![CDATA[ 
 	         <key>aps-environment</key> 
 	         <string>production</string> 
 	      	]]> 
 	</Entitlements>
+--------------------------------------------------------------------------
 
-Pushnotifications
+Pushnotifications and facebook login (Android)
 ===========
+Android is more simpler, just add these config to your app.xml
 
-phải đăng kí device với nextpeer : registerDeviceToken(token:String)
-phải gửi data đi nextpeer khi nhận được push : sendNotification2Nextpeer(str:String)
-Android thêm vào app.xml
-
+--------------------------------------------------------------------------
 	<uses-permission android:name=“android.permission.INTERNET” />	
 	<uses-permission android:name=“android.permission.ACCESS_NETWORK_STATE” />	
 	<uses-permission android:name=“android.permission.RECEIVE_BOOT_COMPLETED” />
@@ -155,5 +162,5 @@ Android thêm vào app.xml
 			</intent-filter>
 		</receiver>	
 	</application>
-
+--------------------------------------------------------------------------
 
