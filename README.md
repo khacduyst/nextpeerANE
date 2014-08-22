@@ -102,6 +102,7 @@ Because Nextpeer return data on GameResult (gameend) diffrence on iOS and Androi
 
 Login Facebook (iOS setting)
 ===========
+
 To allow login from facebook, you shold put this to your xml Please ge facebook SSO on Nextpeer dashboard and replace string start with fb and your app id in the sample code below 
 --------------------------------------------------------------------------
         <key>CFBundleURLTypes</key>
