@@ -63,10 +63,6 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
 				homescreen.visible = false;
 			});
 			
-			nextpeerExt.receivedTournamentResultSignal.add(function(e:NPTournamentEndDataContainer):void{
-				trace("received result : "+e.playerRankInTournament);
-			});
-			
 			var byteArr:ByteArray = new ByteArray();
 			byteArr.writeBoolean(false);
 			byteArr.writeInt(15);
@@ -102,70 +98,13 @@ This game is using Signal (https://github.com/robertpenner/as3-signals) concept 
 				homescreen.visible = true;
 				trace("game ended");
 			});
+			
+			nextpeerExt.receivedTournamentResultSignal.add(function(e:NPTournamentEndDataContainer):void{
+				trace("received result : "+e.playerRankInTournament);
+			});
  
  
  --------------------------------------------------------------------------
-
-
-
-
-
-
-
-Events : We used Signal to dispatch events
-===========
-
-	+ gameStartedWithDetailsSignal (e: NextpeerTournamentContainer)
-	+ gameEndedSignal
-	+ cantInstallExt (có lỗi với nextpeer)
-	+ receivedCustomData (e:NPTournamentCustomMessage) : e.message là ByteArray (chứa thông tin dữ liệu, gửi gì nhận đó)
-	+ receivedCustomDataUnreliable : y như trên
-	+ receivedTournamentStatusSignal (e:Array, mỗi phần tử kiểu NPTournamentPlayerResults), (mỗi s 1 lần gọi)
-	+ receivedTournamentResultSignal (e:NPTournamentEndDataContainer)
-
-Functions
-===========
-
-	+ initNextPeer(gameid)
-	+ showDashboard()
-	+ reportScore(score:Number)
-	+ endGame(score:Number)
-	+ reportForfeitForCurrentTournament() : quit game
-	+ enableRankingDisplay(true/false) : Hiện ingame display hay ko
-	+ sendCustomdata(e:ByteArray)
-	+ sendCustomdataUnreliable(e:ByteArray)
-
-iOS only functions
-
-	+ registerDeviceToken(token:String)
-	+ sendNotification2Nextpeer(str:String)
-
-Sample code for send and receive custom data message
-===========
-
-Send
-
-var byteArr:ByteArray = new ByteArray();
-
-			byteArr.writeBoolean(false);
-			byteArr.writeInt(15);
-			byteArr.writeDouble(16.5);
-			byteArr.writeUTF("this is a test message"); 
-			TestNextpeer.instance.nextpeerExt.sendCustomdata(byteArr);
-
-Receive
-
-nextpeerExt.receivedCustomData.add(function(e:NPTournamentCustomMessage){
-
-			var bys:ByteArray = e.message;
-			trace("---- received ---------");
-			trace(bys.readBoolean());
-			trace(bys.readInt());
-			trace(bys.readDouble());
-			trace(bys.readUTF());
-			
-			trace("---- end received ---------"); 
-		});
 
 Login Facebook
 ===========
